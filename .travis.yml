@@ -1,0 +1,19 @@
+dist: focal
+language: c
+services:
+- docker
+script:
+- bash build.sh
+- make release
+- make check
+deploy:
+  provider: script
+  script: make deploy
+  on:
+    branch: master
+notifications:
+  email:
+    recipients:
+    - joel@jms.id.au
+    on_success: never
+    on_failure: always
